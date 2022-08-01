@@ -12,6 +12,8 @@ export default function App(){
   const [img,setImg] = React.useState([])
   const [date,setDate] =React.useState([])
   const [info,setInfo]=React.useState()
+  const [number,setNumber]=React.useState([])
+  
   console.log(Title)
     return(
         <>
@@ -21,8 +23,8 @@ export default function App(){
          <Routes>
            <Route path="/" except element={<Movies setTitle={setTitle}/>}></Route>
            <Route path="/sessoes/:idFilme" element={<Sessions setImg={setImg} img={img} Title={Title} date={date} setDate={setDate}/>}></Route>
-           <Route path="/assentos/:idSessao" element={<Register img={img} Title={Title} date={date} setInfo={setInfo}/>}></Route>
-           <Route path="/sucesso" element={<Sucesso info={info}/>}></Route>
+           <Route path="/assentos/:idSessao" element={<Register img={img} Title={Title} date={date} setInfo={setInfo} setNumber={setNumber} number={number}/>}></Route>
+           <Route path="/sucesso" element={<Sucesso info={info} number={number} Title={Title}/>}></Route>
          </Routes>   
         </BrowserRouter>
         </>

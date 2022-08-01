@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate  } from 'react-router-dom';
 import styled from "styled-components";
 import axios from 'axios'
 import { useEffect } from 'react';
@@ -7,12 +7,14 @@ import Cadeira from './Cadeira';
 import Footer from './Footer';
 
 
-export default function Register({Title,img,setInfo}){
+
+export default function Register({Title,img,setInfo,setNumber,number}){
     const { idSessao } = useParams();
     const [seats,setSeats] = React.useState([])
     const [name,setName] = React.useState('')
     const [cpf,setCpf] = React.useState('')
     const [ids,setIds]=React.useState([])
+    let navigate = useNavigate()
 
 
     useEffect(()=>{
@@ -34,6 +36,7 @@ export default function Register({Title,img,setInfo}){
         alert("CHAMOU")
         const requisicao=axios.post(`https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many`,dados)
         setInfo(dados)
+        navigate('/sucesso')
 
         requisicao.then(console.log('sucesso'))
         requisicao.catch(console.log('erro'))
@@ -48,7 +51,7 @@ export default function Register({Title,img,setInfo}){
             <h1>Selecione o(s) assento(s)</h1>
         </Selecione>
         <Seats>
-        {seats.map((seat)=>{return(<Cadeira isAvailable={seat.isAvailable} name={seat.name} id={seat.id} setIds={setIds} ids={ids}/>)})}
+        {seats.map((seat)=>{return(<Cadeira isAvailable={seat.isAvailable} name={seat.name} id={seat.id} setIds={setIds} ids={ids} setName={setName} setNumber={setNumber} number={number}/>)})}
         </Seats>
         <Options>
             <Box background={'#8DD7CF'} border={'#1AAE9E'}>
@@ -69,7 +72,7 @@ export default function Register({Title,img,setInfo}){
         <input type="text" value={name} placeholder="Digite seu nome..." onChange={e=>setName(e.target.value)}/>
         <h1>CPF do comprador:</h1>
         <input type="number" value={cpf} placeholder='Digite seu CPF...' onChange={e=>setCpf(e.target.value)}/>
-        <Link to='/sucesso'><button type="submit">Reservar assento(s)</button></Link>
+        <button type="submit">Reservar assento(s)</button>
         </Forms>
         <Footer Title={Title} img={img}/>
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
 
-export default function Sucesso({info}){
+export default function Sucesso({info,number,Title}){
     console.log(info)
     return(
         <>
@@ -9,18 +9,17 @@ export default function Sucesso({info}){
 
         <Info>
         <h1>Filme e sessão</h1>
-        <h2>Enola Holmes</h2>
-        <h2>24/06/2021 15:00</h2>
+        <h2>{Title}</h2>
+
         </Info>
         <Info>
         <h1>Ingressos</h1>
-        <h2>Assento 45</h2>
-        <h2>Assento 46</h2>
+        {number.map((numb)=> {return(<h2>Assento {numb}</h2>)})}
         </Info>
         <Info>
         <h1>Comprador</h1>
-        <h2>Nome:</h2>
-        <h2>CPF: </h2>
+        <h2>Nome:{info.name}</h2>
+        <h2>CPF:{info.cpf} </h2>
         </Info>
         <Link to="/">
             <Button>

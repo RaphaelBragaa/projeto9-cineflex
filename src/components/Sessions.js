@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import axios from 'axios'
 import { useEffect } from 'react';
@@ -10,7 +10,7 @@ export default function Sessions({Title,setImg,img,date,setDate}){
     const { idFilme } = useParams();
     const [items,setItems] = React.useState([])
     console.log(Title)
-
+    let navigate = useNavigate()
     useEffect(()=>{
         const requisicao = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`)
 
@@ -21,6 +21,7 @@ export default function Sessions({Title,setImg,img,date,setDate}){
         })
     },[])
 
+    
    console.log(date)
     return(
         <>
@@ -31,7 +32,7 @@ export default function Sessions({Title,setImg,img,date,setDate}){
         <Dia>
             <h1>{item.weekday} - {item.date}</h1>
             <Horarios>
-               <Link  to={`/assentos/${item.showtimes[0].id}`}> <div onClick={()=>setDate(item.weekday)}>{item.showtimes[0].name}</div> </Link>
+               <Link  to={`/assentos/${item.showtimes[0].id}`}> <div onClick={()=>setDate([...date,item.weekday])}>{item.showtimes[0].name}</div> </Link>
                <Link to={`/assentos/${item.showtimes[1].id}`}><div onClick={()=>setDate(item.weekday)}>{item.showtimes[1].name}</div></Link>
             </Horarios>
         </Dia>)})}

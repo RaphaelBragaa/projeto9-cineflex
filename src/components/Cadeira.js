@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 
 
-export default function Cadeira({name,isAvailable,id,setIds,ids}){
+export default function Cadeira({name,isAvailable,id,setIds,ids,setNumber,number}){
      const [selecionadoA,setSelecionadoA] = React.useState('#C3CFD9')
      const [selecionadoB,setSelecionadoB] = React.useState('#7B8B99')
     function Escolhido(p){
@@ -10,7 +10,9 @@ export default function Cadeira({name,isAvailable,id,setIds,ids}){
         setSelecionadoA('#8DD7CF')
         setSelecionadoB('#1AAE9E')
         setIds([...ids,id])
+        setNumber([...number,name])
         console.log(ids)
+        console.log(number)
         
     }
     } 
